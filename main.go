@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	_ "fmt"
 	"io"
 	"log"
 	"os"
@@ -58,12 +57,12 @@ func main() {
 				if n != 0 {
 					if err != nil {
 						if err != io.EOF {
-							fmt.Println("Error reading from serial port: ", err)
+							fmt.Fprintln(os.Stdout, "Error reading from serial port: ", err)
 						}
 					} else {
 						buf = buf[:n]
 						//fmt.Println("n =", n)
-						fmt.Printf("%s", buf)
+						fmt.Fprintf(os.Stdout, "%s", buf)
 					}
 				}
 			}
