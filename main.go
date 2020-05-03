@@ -1,10 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	_ "fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"time"
@@ -21,10 +21,11 @@ var (
 func main() {
 	kingpin.Parse()
 
-	text, err := ioutil.ReadAll(os.Stdin)
-	if err != nil {
-		log.Fatal(err)
-	}
+	// 全部読み
+	//text, err := ioutil.ReadAll(os.Stdin)
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
 
 	// Set up options.
 	options := serial.OpenOptions{
@@ -44,15 +45,6 @@ func main() {
 	// Make sure to close it later.
 	defer port.Close()
 
-	_, err = port.Write([]byte(text))
-	if err != nil {
-		log.Fatalf("port.Write: %v", err)
-	}
-
-	go func() {
-		// Write
-	}()
-
 	go func() {
 		t1 := time.NewTicker(100 * time.Millisecond)
 		defer t1.Stop()
@@ -69,15 +61,23 @@ func main() {
 						}
 					} else {
 						buf = buf[:n]
-						fmt.Println("n =", n)
-						fmt.Printf("Rx: %s\n", buf)
+						//fmt.Println("n =", n)
+						fmt.Printf("%s", buf)
 					}
 				}
 			}
 		}
 	}()
 
-	for {
+	// Write
+	f := bufio.NewScanner(os.Stdin)
+	for f.Scan() {
+		text := f.Text()
+		text = text + "\n"
+		_, err = port.Write([]byte(text))
+		if err != nil {
+			log.Fatalf("port.Write: %v", err)
+		}
 	}
 
 	// fmt.Println("Wrote", n, "bytes.")
