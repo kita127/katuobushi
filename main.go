@@ -1,12 +1,15 @@
 package main
 
 import (
+	"fmt"
 	_ "fmt"
-	"github.com/jacobsa/go-serial/serial"
-	"gopkg.in/alecthomas/kingpin.v2"
+	"io"
 	"io/ioutil"
 	"log"
 	"os"
+
+	"github.com/jacobsa/go-serial/serial"
+	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 var (
@@ -43,6 +46,35 @@ func main() {
 	_, err = port.Write([]byte(text))
 	if err != nil {
 		log.Fatalf("port.Write: %v", err)
+	}
+
+	//go func() {
+	//	for {
+	//		var recData []byte
+	//		_, err = port.Read(recData)
+	//		if err != nil {
+	//			log.Fatalf("port.Read: %v", err)
+	//		}
+
+	//		fmt.Printf("%s", recData)
+	//	}
+	//}()
+
+	go func() {
+		buf := make([]byte, 32)
+		n, err := port.Read(buf)
+		if err != nil {
+			if err != io.EOF {
+				fmt.Println("Error reading from serial port: ", err)
+			}
+		} else {
+			buf = buf[:n]
+			fmt.Println("n =", n)
+			fmt.Printf("Rx: %s\n", buf)
+		}
+	}()
+
+	for {
 	}
 
 	// fmt.Println("Wrote", n, "bytes.")
