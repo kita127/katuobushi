@@ -52,7 +52,7 @@ func main() {
 			select {
 			case <-t1.C:
 				//Read
-				buf := make([]byte, 32)
+				buf := make([]byte, 128)
 				n, err := port.Read(buf)
 				if n != 0 {
 					if err != nil {
@@ -85,6 +85,4 @@ func main() {
 	for {
 		// loop
 	}
-
-	// fmt.Println("Wrote", n, "bytes.")
 }
