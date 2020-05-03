@@ -50,7 +50,12 @@ func main() {
 	}
 
 	go func() {
+		// Write
+	}()
+
+	go func() {
 		t1 := time.NewTicker(100 * time.Millisecond)
+		defer t1.Stop()
 		for {
 			select {
 			case <-t1.C:
