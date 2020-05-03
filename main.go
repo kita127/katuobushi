@@ -16,6 +16,7 @@ import (
 var (
 	portFlag = kingpin.Flag("port", "port name (--port=COM3)").Required().String()
 	baudRate = kingpin.Flag("baud-rate", "baud rate (--baud-rate=9600)").Default("9600").Int()
+	readTime = kingpin.Flag("read-time", "read cycle time(ms)").Default("100").Int()
 )
 
 func main() {
@@ -46,7 +47,7 @@ func main() {
 	defer port.Close()
 
 	go func() {
-		t1 := time.NewTicker(100 * time.Millisecond)
+		t1 := time.NewTicker(time.Duration(*readTime) * time.Millisecond)
 		defer t1.Stop()
 		for {
 			select {
@@ -70,14 +71,20 @@ func main() {
 	}()
 
 	// Write
-	f := bufio.NewScanner(os.Stdin)
-	for f.Scan() {
-		text := f.Text()
-		text = text + "\n"
-		_, err = port.Write([]byte(text))
-		if err != nil {
-			log.Fatalf("port.Write: %v", err)
+	go func() {
+		f := bufio.NewScanner(os.Stdin)
+		for f.Scan() {
+			text := f.Text()
+			text = text + "\n"
+			_, err = port.Write([]byte(text))
+			if err != nil {
+				log.Fatalf("port.Write: %v", err)
+			}
 		}
+	}()
+
+	for {
+		// loop
 	}
 
 	// fmt.Println("Wrote", n, "bytes.")
