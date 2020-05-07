@@ -1,22 +1,22 @@
-# katuobushi
-Katsuobushi is a usb serial communication device that runs on your OS terminal.
+# Katuobushi
+Katsuobushi is a USB serial communication device that runs on your OS terminal.
 
 ## Description
+Katsuobushi is a CLI tool that allows USB serial communication on your OS terminal.
 
-Katsuobushi はあなたのマシンのターミナルで USB シリアル通信を実現する CLI ツールです.
-起動時に通信するポートとボーレートを設定します.
-ポートは `--port` オプションで指定します. 通信対象のポートの調べ方は Windows 環境であれば `MODE` コマンドで調べることが可能です.
-ボーレートは `--baud-rate` で設定します(デフォルトは 9600).
+You configure port and baud rate when it executes.
+The port is configured with `--port`.  You can check the target port with `MODE` command if you are using windows OS.
+Baud rate is configured with `--baud-rate`(default 9600).
 
 ### Send
-標準入力から1行ごとに入力したテキストをアスキーで送信します.
-1行ごとのテキストは改行で区切られます.
+It sends a line as ASCII which are entered by standard-in.
+Each text is split by new line.
 
 ### Receive
-受信したデータをアスキーで標準出力します.
-一度に受信可能なデータサイズは 128 byte です.
-受信データはポーリングにより読み出します.
-ポーリング周期は `--read-time` オプションで設定可能です(デフォルトは 100ms).
+It outputs received data as ASCII into standard-out.
+Receivable data size is 128 bytes.
+Received data are read by polling.
+That polling timing can be configured by `--read-time`(default 100ms).
 
 ## Installation
 
