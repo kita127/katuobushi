@@ -40,11 +40,12 @@ That polling timing can be configured by `--read-time`(default 100ms).
     usage: katuobushi.exe --port=PORT [<flags>]
 
     Flags:
-      --help            Show context-sensitive help (also try --help-long and
-                        --help-man).
-      --port=PORT       port name (--port=COM3)
-      --baud-rate=9600  baud rate (--baud-rate=9600)
-      --read-time=100   read cycle time(ms)
+          --help            Show context-sensitive help (also try --help-long and
+                            --help-man).
+          --port=PORT       port name (--port=COM3)
+          --baud-rate=9600  baud rate (--baud-rate=9600)
+          --read-time=100   read cycle time(ms)
+      -i, --interactive     interactive mode
 
 
 ## License
