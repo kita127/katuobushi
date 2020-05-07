@@ -1,12 +1,18 @@
 # Katuobushi
 Katsuobushi is a USB serial communication device that runs on your OS terminal.
 
+## Environment
+* Windows 10
+
+Other OS may work, but I have not tried it.
+
 ## Description
 Katsuobushi is a CLI tool that allows USB serial communication on your OS terminal.
 
 You configure port and baud rate when it executes.
 The port is configured with `--port`.  You can check the target port with `MODE` command if you are using windows OS.
 Baud rate is configured with `--baud-rate`(default 9600).
+
 
 ### Send
 It sends a line as ASCII which are entered by standard-in.
