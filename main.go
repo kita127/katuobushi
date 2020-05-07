@@ -59,6 +59,9 @@ func main() {
 
 func interactiveMode(port io.ReadWriteCloser) {
 
+	fmt.Fprintln(os.Stdout, "This is Katuobushi interactive mode.")
+	fmt.Fprintln(os.Stdout, "Please enter the sending texts...")
+
 	go func() {
 		t1 := time.NewTicker(time.Duration(*readTime) * time.Millisecond)
 		defer t1.Stop()
