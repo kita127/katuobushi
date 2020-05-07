@@ -13,12 +13,21 @@ You configure port and baud rate when it executes.
 The port is configured with `--port`.  You can check the target port with `MODE` command if you are using windows OS.
 Baud rate is configured with `--baud-rate`(default 9600).
 
+### One-shot mode
+It sends the target some texts received by standard-in.
 
-### Send
+    $echo hello | katuobushi --port COM3
+    or
+    $cat input.txt | katuobushi --port COM3
+
+### Interactive mode
+`--interactive`(short-flag `-i`) option allows that the tool communicates target in interactive mode.
+
+#### Send
 It sends a line as ASCII which are entered by standard-in.
 Each text is split by new line.
 
-### Receive
+#### Receive
 It outputs received data as ASCII into standard-out.
 Receivable data size is 128 bytes.
 Received data are read by polling.
