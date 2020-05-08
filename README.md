@@ -35,6 +35,13 @@ That polling timing can be configured by `--read-time`(default 100ms).
 
 ## Installation
 
+binalies<br>
+https://github.com/kita127/katuobushi/releases
+
+If you use Go,
+
+    $go get github.com/kita127/katuobushi
+
 ## Usage
 
     usage: katuobushi.exe --port=PORT [<flags>]
